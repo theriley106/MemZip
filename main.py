@@ -25,9 +25,10 @@ def convert_message(message):
 def get_card(id_val):
 	return CARD_DB[id_val]
 
-def display_multiple(listOfNums, per_line_count=4):
+def display_multiple(listOfNums):
 	card_info = [CARD_DB[num] for num in listOfNums]
-	print card.create_cards(card_info)
+	card_string = card.create_cards(card_info)
+	print card_string
 
 
 def get_high_scores():
@@ -62,4 +63,4 @@ if __name__ == '__main__':
 	#print get_high_scores()
 	#print get_card(31)['image']
 	#print ' '.join([a['image'] for a in generate_cards(2)])
-	display_multiple([31])
+	display_multiple([random.randint(1, 31) for i in range(4)])

@@ -59,6 +59,8 @@ def create_cards(cards, height=10, width=15):
 	for card in cards:
 		card['suit'] = random.choice(['♠', '♦', '♥', '♣']).decode('utf-8')
 		card['value'] = card['value'].decode('utf-8')
+		if card['value'] != '10':
+			card['value'] = str(card['value'][0])
 		card_template[0].append(corner_left_string + ''.join([top_string * (width-2)]) + corner_right_string)
 		card_template[1].append(create_line1(card['value'], width))
 		for i in range((height-5)/2):
@@ -77,8 +79,11 @@ def create_cards(cards, height=10, width=15):
 			at_value = at_value+i
 		card_template[at_value+1].append(create_line3(card['suit'], card['value'], width))
 		card_template[at_value+2].append(create_line4(width))
+	return_string = ""
 	for va in card_template:
-		print ' '.join(va)
+		return_string += ' '.join(va)
+		return_string += "\n"
+	return return_string
 
 if __name__ == '__main__':
 	create_cards(10, 15, [{"value": "K", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}])
