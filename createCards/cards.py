@@ -100,6 +100,10 @@ def ascii_version_of_hidden_card(*cards):
 
 
 list_of_cards = json.load(open("all_cards.json"))
-for card in list_of_cards:
+for id_val, card in enumerate(list_of_cards):
     test_card = Card(card['suit'], card['value'])
-    print ascii_version_of_card([test_card])
+    card['image'] = ascii_version_of_card([test_card])
+    card['id_val'] = id_val
+
+with open('data.json', 'w') as outfile:
+    json.dump(list_of_cards, outfile)

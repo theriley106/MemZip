@@ -93,7 +93,7 @@ def lambda_handler(event, context):
     if type_of_request == "POST":
         payload = event['queryStringParameters']
         if 'username' in payload and 'number' in payload:
-            return update(payload['username'], payload['num'])
+            return update(payload['username'], payload['number'])
         else:
             return respond(False, message=str(payload))
     else:
