@@ -13,16 +13,27 @@ def create_line1(value, width):
 	string += right_string
 	return string
 
-def create_line2(value, width):
+def create_line2(suit, width):
 	right_string = "│"
 	left_string = "│"
 	string = left_string
-	string += value
+	string += " " * ((width-3)/2)
+	string += suit
+	string += " " * ((width-3)/2)
+	string += right_string
+	return string
+
+def create_line3(suit, value, width):
+	right_string = "│"
+	left_string = "│"
+	string = left_string
 	if value == '10':
-		string += ""
+		string += " " * ((width-6))
 	else:
-		string += " "
-	string += " " * (width-4)
+		string += " " * ((width-5))
+	string += value
+	string += " "
+	string += suit
 	string += right_string
 	return string
 
@@ -41,9 +52,20 @@ def create_cards(height, width, cards):
 			string += " " * (width-2)
 			string += "│"
 			card_template[2+i].append(string)
-		for va in card_template:
-			print str(va[0])
+			at_value = 2+i
+		card_template[at_value+1].append(create_line2(card['suit'], width))
+		at_value = at_value + 2
+		for i in range((height-5)/2):
+			string = "│"
+			string += " " * (width-2)
+			string += "│"
+			card_template[at_value+i].append(string)
+			at_value = at_value+i
+		card_template[at_value+1].append(create_line3(card['suit'], card['value'], width))
+
+	for va in card_template:
+		print ' '.join(va)
 
 if __name__ == '__main__':
-	create_cards(10, 15, [{"value": "10"}])
+	create_cards(10, 15, [{"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}])
 
