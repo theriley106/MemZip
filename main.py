@@ -1,5 +1,8 @@
+# coding: utf-8
 import requests
 import json
+import random
+import card
 
 URL_DB = json.load(open("urls.json"))
 # Gets the urls
@@ -12,6 +15,8 @@ for val in ALL_CARDS:
 HIGH_SCORE_URL = URL_DB["highscore"]
 
 
+def generate_cards(count=1):
+	return [random.choice(ALL_CARDS) for i in range(count)]
 
 def convert_message(message):
 	# Converts the message into a python dict
@@ -19,6 +24,11 @@ def convert_message(message):
 
 def get_card(id_val):
 	return CARD_DB[id_val]
+
+def display_multiple(listOfNums, per_line_count=4):
+	card_info = [CARD_DB[num] for num in listOfNums]
+	print card.create_cards(card_info)
+
 
 def get_high_scores():
 	# Returns a python dictionary containing high scores
@@ -50,4 +60,6 @@ class game(object):
 if __name__ == '__main__':
 	#print start_new_game('test')
 	#print get_high_scores()
-	print get_card(31)['image']
+	#print get_card(31)['image']
+	#print ' '.join([a['image'] for a in generate_cards(2)])
+	display_multiple([31])

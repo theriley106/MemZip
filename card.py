@@ -1,5 +1,8 @@
 # coding: utf-8
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+import random
 def create_line1(value, width):
 	right_string = "│"
 	left_string = "│"
@@ -46,7 +49,7 @@ def create_line4(width):
 	string += right_string
 	return string
 
-def create_cards(height, width, cards):
+def create_cards(cards, height=10, width=15):
 	corner_left_string = "┌"
 	corner_right_string = "┐"
 	top_string = "─"
@@ -54,6 +57,8 @@ def create_cards(height, width, cards):
 	left_string = "│"
 	card_template = [[] for i in range(height)]
 	for card in cards:
+		card['suit'] = random.choice(['♠', '♦', '♥', '♣']).decode('utf-8')
+		card['value'] = card['value'].decode('utf-8')
 		card_template[0].append(corner_left_string + ''.join([top_string * (width-2)]) + corner_right_string)
 		card_template[1].append(create_line1(card['value'], width))
 		for i in range((height-5)/2):
