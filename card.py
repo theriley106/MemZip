@@ -37,6 +37,15 @@ def create_line3(suit, value, width):
 	string += right_string
 	return string
 
+def create_line4(width):
+	right_string = "┘"
+	left_string = "└"
+	bottom_string = "─"
+	string = left_string
+	string += bottom_string * ((width-2))
+	string += right_string
+	return string
+
 def create_cards(height, width, cards):
 	corner_left_string = "┌"
 	corner_right_string = "┐"
@@ -62,10 +71,10 @@ def create_cards(height, width, cards):
 			card_template[at_value+i].append(string)
 			at_value = at_value+i
 		card_template[at_value+1].append(create_line3(card['suit'], card['value'], width))
-
+		card_template[at_value+2].append(create_line4(width))
 	for va in card_template:
 		print ' '.join(va)
 
 if __name__ == '__main__':
-	create_cards(10, 15, [{"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}])
+	create_cards(10, 15, [{"value": "K", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}, {"value": "10", "suit":"♥"}])
 
