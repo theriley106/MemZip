@@ -56,7 +56,6 @@ class game(object):
 			self.menu()
 		else:
 			self.username = username
-		self.current_card_count = 1
 		self.highscores = get_high_scores()
 		#newgame = start_new_game(self.username)
 		#self.scores = newgame['order']
@@ -87,6 +86,7 @@ To make the challenge harder, the time to look at the cards will decrease each r
 		flush_window()
 
 	def print_countdown(self):
+		# Prints the countdown before the game starts
 		for i in range(3):
 			print("Round #{} Starting in {}...".format(self.level+1, 3-i))
 			time.sleep(1)
@@ -97,6 +97,7 @@ To make the challenge harder, the time to look at the cards will decrease each r
 		# This is the amount of cards in the round
 		self.card_order[self.level] = []
 		self.print_countdown()
+		# Prints the countdown before the game starts
 		for i in range(cards_in_round):
 			next_card = random.randint(1,31)
 			self.card_order[self.level].append(next_card)
@@ -151,12 +152,6 @@ To make the challenge harder, the time to look at the cards will decrease each r
 			return False
 		else:
 			return True
-
-
-	def play(self, num):
-		for i in range(self.current_card_count):
-			card = raw_input("Next Card: ")
-
 
 
 if __name__ == '__main__':
