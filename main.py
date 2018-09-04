@@ -198,10 +198,15 @@ class game(object):
 		return screen
 
 	def game_over(self):
-		self.formatted_high_score = self.print_highscore_chart()
+		# This runs when the user has 3 incorrect answers
 		flush_window()
+		# Clears window
+		self.formatted_high_score = self.print_highscore_chart()
+		# Gets a string that represents a formatted version of the high score chart
 		print "Game over :(\n\nGreat job, {}!  Here is how you stack up against the other players: \n\n{}\n\n".format(self.username, self.formatted_high_score)
+		# Prints out the message
 		if raw_input("Play again? (Y/N) ").lower() != 'y':
+			# Asks if the user wants to play again
 			return False
 		else:
 			return True
