@@ -131,26 +131,45 @@ class game(object):
 		return "{} | Score: {} | Incorrect: {}".format(self.username, self.correct, self.incorrect)
 
 	def submit_answers(self):
-		for i in range(self.level + 5):
+		cards_in_round = self.level + self.starting_number
+		# This is the amount of cards in the round
+		for i in range(cards_in_round):
+			# Iterates over all of the cards and asks for the order
 			correct_answer = self.card_order[self.level][i]
+			# This is the correct answer
 			card_choices = [correct_answer]
+			# Starts a list with a single element containing the correct answer
 			while len(card_choices) < 4:
+				# While loop until the size is > 4 - makes sure they are all unique
 				temp_card = random.randint(1, 31)
+				# Generates a random card id
 				if temp_card not in card_choices:
+					# Only appends if it's unique
 					card_choices.append(temp_card)
+					# Saves it to the card choices list
 			random.shuffle(card_choices)
+			# Shuffles the cards
 			print self.current_score_string()
+			# This is the header with current score information
 			display_multiple(card_choices)
+			# Displays all 4 cards in the terminal
 			correct_index = card_choices.index(correct_answer)
+			# This is the index of the correct choice | ie the right answer
 			if int(raw_input("Input Card Number #{}: ".format(i+1))) - 1 != correct_index:
+				# Checks to see if it's correct or incorrect
 				self.incorrect += 1
 			else:
 				self.correct += 1
 			if self.incorrect > 2:
+				# This means the person missed more than 3...
 				keep_playing = self.game_over()
+				# Ends game
 				flush_window()
+				# Clears window
 				return keep_playing
+				# Returns if the user wants to keep playing or not
 			flush_window()
+			# Clears window
 
 	def print_highscore_chart(self):
 		score = self.correct
