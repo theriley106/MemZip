@@ -58,7 +58,7 @@ class game(object):
 		self.highscores = get_high_scores()
 		#newgame = start_new_game(self.username)
 		#self.scores = newgame['order']
-		self.level = 10
+		self.level = 1
 		self.card_order = {}
 		self.delay = 1
 		self.correct = 0
@@ -118,9 +118,24 @@ Please select a mode from the options below:
 				self.game_over()
 			flush_window()
 
+	def print_highscore_chart(self):
+		score = self.correct
+		username = self.username[:15].ljust(15)
+		printed = False
+		screen = "{} | High Score\n\n".format('Username'.ljust(15))
+		for key, value in self.highscores.items():
+			if value <= score and printed == False:
+				printed = True
+				screen += "{} | {} (Current Player)".format(username, score) + "\n"
+			screen += "{} | {}".format(key[:15].ljust(15), value)  + "\n"
+		if printed == False:
+			screen += "{} | {}   (Current Player)".format(username, score) + "\n"
+		return screen
+
 	def game_over(self):
+		self.formatted_high_score = self.print_highscore_chart()
 		flush_window()
-		print "Game over :(\n\nGreat job, {}!  Here is how you stack up against the other players: \n{}\n\n".format(self.username, self.highscores)
+		print "Game over :(\n\nGreat job, {}!  Here is how you stack up against the other players: \n\n{}\n\n".format(self.username, self.formatted_high_score)
 		raw_input("Play again? ")
 
 
