@@ -22,9 +22,7 @@ To make the challenge harder, the time to look at the cards will decrease each r
 
 The project was limited to a terminal-based game, so images of playing cards were unfortunately out of the question.
 
-I considered many alternatives for the card displays, but ultimately decided that creating my own text art would be the best way to approach the problem.  Using UTF-8 Characters, I was able to create the look of a regular playing card with a specified height and width - this created a string that was visually similar to a standard playing card.
-
-You can see in card.py, there is a function known as card.create_cards(), which takes a list of dictionaries defining the "Type" and "Suit" of the card and returns a string.
+I considered many alternatives for the card displays, but ultimately decided that creating my own text art would be the best way to approach the problem.  Using UTF-8 Characters, I was able to create the look of a regular playing card with a specified height and width.  You can see in card.py, there is a function known as card.create_cards(), which takes a list of dictionaries defining the "Type" and "Suit" of the card and returns a string.
 
 
 
