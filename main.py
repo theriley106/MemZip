@@ -65,6 +65,7 @@ class game(object):
 		self.delay = 1
 		self.correct = 0
 		self.incorrect = 0
+		self.starting_number = 5
 
 	def menu(self):
 		game_menu = '''
@@ -86,7 +87,7 @@ To make the challenge harder, the time to look at the cards will decrease each r
 		flush_window()
 
 	def start_game(self):
-		cards_in_round = self.level + 5
+		cards_in_round = self.level + self.starting_number
 		# This is the amount of cards in the round
 		self.card_order[self.level] = []
 		for i in range(3):
