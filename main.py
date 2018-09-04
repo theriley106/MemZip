@@ -31,6 +31,7 @@ To make the challenge harder, the time to look at the cards will decrease each r
 
 		'''
 
+SESSION_KEY = requests.get(HIGH_SCORE_URL).json()['key']
 
 def generate_cards(count=1):
 	return [random.choice(ALL_CARDS) for i in range(count)]
@@ -78,6 +79,7 @@ class game(object):
 			# Sets it the username used in the previous session
 		self.highscores = get_high_scores()
 		#newgame = start_new_game(self.username)
+		print self.highscores
 		#self.scores = newgame['order']
 		self.level = 1
 		# This is the level the user starts at
@@ -199,6 +201,8 @@ class game(object):
 
 	def game_over(self):
 		# This runs when the user has 3 incorrect answers
+		self.submit_high_score()
+		# This submits the high score to the DB
 		flush_window()
 		# Clears window
 		self.formatted_high_score = self.print_highscore_chart()
@@ -210,6 +214,9 @@ class game(object):
 			return False
 		else:
 			return True
+
+	def submit_high_score(self):
+		requests.post(HIGH_SCORE_URL + "?key={}&username={}&number={}".format(SESSION_KEY, self.username, self.correct))
 
 
 if __name__ == '__main__':
