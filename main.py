@@ -3,6 +3,7 @@ import requests
 import json
 import random
 import card
+import time
 
 URL_DB = json.load(open("urls.json"))
 # Gets the urls
@@ -43,14 +44,40 @@ def start_new_game(username):
 	res = requests.post(url)
 	return res.json()
 
+def flush_window():
+	for i in range(30):
+		print("")
+	time.sleep(.2)
+
 class game(object):
 	"""docstring for game"""
 	def __init__(self, username):
 		self.current_card_count = 1
 		self.username = username
-		self.highscores = get_high_scores()
-		newgame = start_new_game(self.username)
-		self.scores = newgame['order']
+		#self.highscores = get_high_scores()
+		#newgame = start_new_game(self.username)
+		#self.scores = newgame['order']
+		self.level = 0
+		self.card_order = {}
+		self.delay = 1
+
+	def start_game(self):
+		cards_in_round = self.level + 5
+		# This is the amount of cards in the round
+		self.card_order[self.level] = []
+		for i in range(3):
+			print("Starting in {}...".format(3-i))
+			time.sleep(1)
+			flush_window()
+		for i in range(cards_in_round):
+			next_card = random.randint(1,31)
+			self.card_order[self.level].append(next_card)
+			display_multiple([next_card])
+			time.sleep(self.delay)
+			flush_window()
+
+		print self.card_order
+
 
 	def play(self, num):
 		for i in range(self.current_card_count):
@@ -63,4 +90,9 @@ if __name__ == '__main__':
 	#print get_high_scores()
 	#print get_card(31)['image']
 	#print ' '.join([a['image'] for a in generate_cards(2)])
-	display_multiple([random.randint(1, 31) for i in range(4)])
+	#for i in range(10):
+	#	display_multiple([random.randint(1, 31) for i in range(1)])
+	#	time.sleep(1)
+	#	flush_window()
+	a = game('chris')
+	a.start_game()
