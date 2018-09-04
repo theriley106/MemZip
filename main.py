@@ -53,6 +53,7 @@ class game(object):
 	"""docstring for game"""
 	def __init__(self, username=None, skip_intro=False):
 		if skip_intro == False:
+			# This means the user did not "Replay"
 			self.menu()
 		else:
 			self.username = username
@@ -60,11 +61,17 @@ class game(object):
 		#newgame = start_new_game(self.username)
 		#self.scores = newgame['order']
 		self.level = 1
+		# This is the level the user starts at
 		self.card_order = {}
+		# This is an ongoing dict keeping track of card order
 		self.delay = 1
+		# This is the delay between cards
 		self.correct = 0
+		# Correct answers by the user
 		self.incorrect = 0
-		self.starting_number = 5
+		# Incorrect answers by the user
+		self.starting_number = 4
+		# Card num is equal to level + starting num
 
 	def menu(self):
 		game_menu = '''
@@ -96,6 +103,7 @@ To make the challenge harder, the time to look at the cards will decrease each r
 		cards_in_round = self.level + self.starting_number
 		# This is the amount of cards in the round
 		self.card_order[self.level] = []
+		# This will reset the card order in case it's a replayed game
 		self.print_countdown()
 		# Prints the countdown before the game starts
 		for i in range(cards_in_round):
