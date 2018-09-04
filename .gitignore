@@ -104,3 +104,6 @@ venv.bak/
 .mypy_cache/
 *.zip
 urls.json
+clearScore.py
+master_key.txt
+createScore.py
