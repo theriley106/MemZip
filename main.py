@@ -16,6 +16,21 @@ for val in ALL_CARDS:
 # Creates a map of card values
 HIGH_SCORE_URL = URL_DB["highscore"]
 
+GAME_INTRO = '''
+Welcome to MemZip - the multiplayer card memorization game
+(And also my KPCB project submission)
+
+High Scores are recorded externally, so you can play against your friends!
+
+The rules are simple - a group of randomly selected playing cards
+will display in the terminal.  You have to respond with the correct order
+of cards to progress through the game.
+
+The number of cards to memorize will increment as each round completes.
+To make the challenge harder, the time to look at the cards will decrease each round.
+
+		'''
+
 
 def generate_cards(count=1):
 	return [random.choice(ALL_CARDS) for i in range(count)]
@@ -57,6 +72,7 @@ class game(object):
 			self.menu()
 		else:
 			self.username = username
+			# Sets it the username used in the previous session
 		self.highscores = get_high_scores()
 		#newgame = start_new_game(self.username)
 		#self.scores = newgame['order']
@@ -74,21 +90,7 @@ class game(object):
 		# Card num is equal to level + starting num
 
 	def menu(self):
-		game_menu = '''
-Welcome to MemZip - the multiplayer card memorization game
-(And also my KPCB project submission)
-
-High Scores are recorded externally, so you can play against your friends!
-
-The rules are simple - a group of randomly selected playing cards
-will display in the terminal.  You have to respond with the correct order
-of cards to progress through the game.
-
-The number of cards to memorize will increment as each round completes.
-To make the challenge harder, the time to look at the cards will decrease each round.
-
-		'''
-		print(game_menu)
+		print(GAME_INTRO)
 		self.username = raw_input("Please enter your name to start a new game: ")
 		flush_window()
 
