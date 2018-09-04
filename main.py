@@ -78,9 +78,7 @@ class game(object):
 			self.username = username
 			# Sets it the username used in the previous session
 		self.highscores = get_high_scores()
-		#newgame = start_new_game(self.username)
-		print self.highscores
-		#self.scores = newgame['order']
+		# This is a non-formatted list of high scores
 		self.level = 1
 		# This is the level the user starts at
 		self.card_order = {}
