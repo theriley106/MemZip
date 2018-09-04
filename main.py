@@ -4,6 +4,7 @@ import json
 import random
 import card
 import time
+import os
 
 URL_DB = json.load(open("urls.json"))
 # Gets the urls
@@ -45,8 +46,7 @@ def start_new_game(username):
 	return res.json()
 
 def flush_window():
-	for i in range(30):
-		print("")
+	os.system('cls' if os.name == 'nt' else 'clear')
 	time.sleep(.2)
 
 class game(object):
