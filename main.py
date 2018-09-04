@@ -55,12 +55,14 @@ class game(object):
 		self.menu()
 		self.current_card_count = 1
 		self.username = username
-		#self.highscores = get_high_scores()
+		self.highscores = get_high_scores()
 		#newgame = start_new_game(self.username)
 		#self.scores = newgame['order']
-		self.level = 0
+		self.level = 10
 		self.card_order = {}
 		self.delay = 1
+		self.correct = 0
+		self.incorrect = 0
 
 	def menu(self):
 		game_menu = '''
@@ -93,6 +95,9 @@ Please select a mode from the options below:
 			time.sleep(self.delay)
 			flush_window()
 
+	def current_score_string(self):
+		return "{} | Score: {} | Incorrect: {}".format(self.username, self.correct, self.incorrect)
+
 	def submit_answers(self):
 		for i in range(self.level + 5):
 			correct_answer = self.card_order[self.level][i]
@@ -102,13 +107,21 @@ Please select a mode from the options below:
 				if temp_card not in card_choices:
 					card_choices.append(temp_card)
 			random.shuffle(card_choices)
+			print self.current_score_string()
 			display_multiple(card_choices)
 			correct_index = card_choices.index(correct_answer)
 			if int(raw_input("Input Card Number #{}: ".format(i+1))) - 1 != correct_index:
-				print("False...")
+				self.incorrect += 1
 			else:
-				print("True")
+				self.correct += 1
+			if self.incorrect > 2:
+				self.game_over()
+			flush_window()
 
+	def game_over(self):
+		flush_window()
+		print "Game over :(\n\nGreat job, {}!  Here is how you stack up against the other players: \n{}\n\n".format(self.username, self.highscores)
+		raw_input("Play again? ")
 
 
 	def play(self, num):
