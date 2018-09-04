@@ -51,10 +51,12 @@ def flush_window():
 
 class game(object):
 	"""docstring for game"""
-	def __init__(self, username):
-		self.menu()
+	def __init__(self, username=None, skip_intro=False):
+		if skip_intro == False:
+			self.menu()
+		else:
+			self.username = username
 		self.current_card_count = 1
-		self.username = username
 		self.highscores = get_high_scores()
 		#newgame = start_new_game(self.username)
 		#self.scores = newgame['order']
@@ -69,15 +71,18 @@ class game(object):
 Welcome to MemZip - the multiplayer card memorization game
 (And also my KPCB project submission)
 
-Please select a mode from the options below:
+High Scores are recorded externally, so you can play against your friends!
 
-(1) Single Player Speed Round
-(2) MultiPlayer (Play against the global leaderboard!)
-(3) View High Scores
+The rules are simple - a group of randomly selected playing cards
+will display in the terminal.  You have to respond with the correct order
+of cards to progress through the game.
+
+The number of cards to memorize will increment as each round completes.
+To make the challenge harder, the time to look at the cards will decrease each round.
 
 		'''
 		print(game_menu)
-		raw_input("Option: ")
+		self.username = raw_input("Please enter your name to start a new game: ")
 		flush_window()
 
 	def start_game(self):
@@ -115,7 +120,11 @@ Please select a mode from the options below:
 			else:
 				self.correct += 1
 			if self.incorrect > 2:
-				self.game_over()
+				keep_playing = self.game_over()
+				if keep_playing == True:
+					flush_window()
+				return keep_playing
+
 			flush_window()
 
 	def print_highscore_chart(self):
@@ -136,7 +145,10 @@ Please select a mode from the options below:
 		self.formatted_high_score = self.print_highscore_chart()
 		flush_window()
 		print "Game over :(\n\nGreat job, {}!  Here is how you stack up against the other players: \n\n{}\n\n".format(self.username, self.formatted_high_score)
-		raw_input("Play again? ")
+		if raw_input("Play again? (Y/N) ").lower() != 'y':
+			return False
+		else:
+			return True
 
 
 	def play(self, num):
@@ -156,4 +168,7 @@ if __name__ == '__main__':
 	#	flush_window()
 	a = game('chris')
 	a.start_game()
-	a.submit_answers()
+	while a.submit_answers() == True:
+		a = game(a.username, True)
+		a.start_game()
+
