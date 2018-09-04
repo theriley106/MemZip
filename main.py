@@ -52,6 +52,7 @@ def flush_window():
 class game(object):
 	"""docstring for game"""
 	def __init__(self, username):
+		self.menu()
 		self.current_card_count = 1
 		self.username = username
 		#self.highscores = get_high_scores()
@@ -61,12 +62,28 @@ class game(object):
 		self.card_order = {}
 		self.delay = 1
 
+	def menu(self):
+		game_menu = '''
+Welcome to MemZip - the multiplayer card memorization game
+(And also my KPCB project submission)
+
+Please select a mode from the options below:
+
+(1) Single Player Speed Round
+(2) MultiPlayer (Play against the global leaderboard!)
+(3) View High Scores
+
+		'''
+		print(game_menu)
+		raw_input("Option: ")
+		flush_window()
+
 	def start_game(self):
 		cards_in_round = self.level + 5
 		# This is the amount of cards in the round
 		self.card_order[self.level] = []
 		for i in range(3):
-			print("Starting in {}...".format(3-i))
+			print("Round #{} Starting in {}...".format(self.level+1, 3-i))
 			time.sleep(1)
 			flush_window()
 		for i in range(cards_in_round):
@@ -87,7 +104,7 @@ class game(object):
 			random.shuffle(card_choices)
 			display_multiple(card_choices)
 			correct_index = card_choices.index(correct_answer)
-			if int(raw_input("Input Card Number: ")) - 1 != correct_index:
+			if int(raw_input("Input Card Number #{}: ".format(i+1))) - 1 != correct_index:
 				print("False...")
 			else:
 				print("True")
