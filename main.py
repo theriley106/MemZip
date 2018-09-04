@@ -76,7 +76,22 @@ class game(object):
 			time.sleep(self.delay)
 			flush_window()
 
-		print self.card_order
+	def submit_answers(self):
+		for i in range(self.level + 5):
+			correct_answer = self.card_order[self.level][i]
+			card_choices = [correct_answer]
+			while len(card_choices) < 4:
+				temp_card = random.randint(1, 31)
+				if temp_card not in card_choices:
+					card_choices.append(temp_card)
+			random.shuffle(card_choices)
+			display_multiple(card_choices)
+			correct_index = card_choices.index(correct_answer)
+			if int(raw_input("Input Card Number: ")) - 1 != correct_index:
+				print("False...")
+			else:
+				print("True")
+
 
 
 	def play(self, num):
@@ -96,3 +111,4 @@ if __name__ == '__main__':
 	#	flush_window()
 	a = game('chris')
 	a.start_game()
+	a.submit_answers()
