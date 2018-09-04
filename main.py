@@ -86,14 +86,17 @@ To make the challenge harder, the time to look at the cards will decrease each r
 		self.username = raw_input("Please enter your name to start a new game: ")
 		flush_window()
 
-	def start_game(self):
-		cards_in_round = self.level + self.starting_number
-		# This is the amount of cards in the round
-		self.card_order[self.level] = []
+	def print_countdown(self):
 		for i in range(3):
 			print("Round #{} Starting in {}...".format(self.level+1, 3-i))
 			time.sleep(1)
 			flush_window()
+
+	def start_game(self):
+		cards_in_round = self.level + self.starting_number
+		# This is the amount of cards in the round
+		self.card_order[self.level] = []
+		self.print_countdown()
 		for i in range(cards_in_round):
 			next_card = random.randint(1,31)
 			self.card_order[self.level].append(next_card)
