@@ -172,17 +172,29 @@ class game(object):
 			# Clears window
 
 	def print_highscore_chart(self):
+		# This is a function specifically for printing the highscore chart
 		score = self.correct
+		# This is the current score
 		username = self.username[:15].ljust(15)
+		# Gets a specified length username text
 		printed = False
+		# Says the user's score has not been printed yet
 		screen = "{} | High Score\n\n".format('Username'.ljust(15))
+		# Prints the header of the high score chart
 		for key, value in self.highscores.items():
+			# Iterates through all of the high scores
 			if value <= score and printed == False:
-				printed = True
+				# This means the user's score is higher than the one that's about to be printed
 				screen += "{} | {} (Current Player)".format(username, score) + "\n"
+				# Adds the user's score to the score list
+				printed = True
+				# The user's score has been printed
 			screen += "{} | {}".format(key[:15].ljust(15), value)  + "\n"
+			# Outputs each user in the high score list
 		if printed == False:
+			# This means it has not been printed
 			screen += "{} | {}   (Current Player)".format(username, score) + "\n"
+			# Adds the user's score to the score list
 		return screen
 
 	def game_over(self):
