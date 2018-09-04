@@ -115,11 +115,17 @@ class game(object):
 		self.print_countdown()
 		# Prints the countdown before the game starts
 		for i in range(cards_in_round):
+			# Iterates over each card in round
 			next_card = random.randint(1,31)
+			# Picks a random card
 			self.card_order[self.level].append(next_card)
+			# Appends it to the current games list of cards
 			display_multiple([next_card])
+			# Displays the SINGLE card... not multiple cards.
 			time.sleep(self.delay)
+			# Sleeps for the delay specified in the beginning
 			flush_window()
+			# Clears the window
 
 	def current_score_string(self):
 		return "{} | Score: {} | Incorrect: {}".format(self.username, self.correct, self.incorrect)
