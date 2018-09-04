@@ -121,10 +121,8 @@ To make the challenge harder, the time to look at the cards will decrease each r
 				self.correct += 1
 			if self.incorrect > 2:
 				keep_playing = self.game_over()
-				if keep_playing == True:
-					flush_window()
+				flush_window()
 				return keep_playing
-
 			flush_window()
 
 	def print_highscore_chart(self):
