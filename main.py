@@ -72,6 +72,7 @@ class game(object):
 		if skip_intro == False:
 			# This means the user did not "Replay"
 			self.menu()
+			# Displays the menu
 		else:
 			self.username = username
 			# Sets it the username used in the previous session
@@ -93,13 +94,16 @@ class game(object):
 
 	def menu(self):
 		print(GAME_INTRO)
+		# Prints the explanation of the game
 		self.username = raw_input("Please enter your name to start a new game: ")
+		# Grabs the username from the user
 		flush_window()
+		# Resets the window
 
 	def print_countdown(self):
 		# Prints the countdown before the game starts
 		for i in range(3):
-			print("Round #{} Starting in {}...".format(self.level+1, 3-i))
+			print("Round #{} Starting in {}...".format(self.level, 3-i))
 			time.sleep(1)
 			flush_window()
 
@@ -167,15 +171,7 @@ class game(object):
 
 
 if __name__ == '__main__':
-	#print start_new_game('test')
-	#print get_high_scores()
-	#print get_card(31)['image']
-	#print ' '.join([a['image'] for a in generate_cards(2)])
-	#for i in range(10):
-	#	display_multiple([random.randint(1, 31) for i in range(1)])
-	#	time.sleep(1)
-	#	flush_window()
-	a = game('chris')
+	a = game()
 	a.start_game()
 	while a.submit_answers() == True:
 		a = game(a.username, True)
