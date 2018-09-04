@@ -62,7 +62,9 @@ def start_new_game(username):
 
 def flush_window():
 	os.system('cls' if os.name == 'nt' else 'clear')
+	# This will run the command to clear the terminal depending on OS
 	time.sleep(.2)
+	# Adding this sleep makes it look like it cleared the terminal...
 
 class game(object):
 	"""docstring for game"""
