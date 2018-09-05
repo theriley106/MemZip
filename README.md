@@ -18,9 +18,9 @@ In addition, the display time of the cards will decrease as each round progresse
 ## Playing the game
 
 ```bash
-pip install -r requirements.txt
+foo@bar /MemZip $ pip install -r requirements.txt
 // Just in case requests is not already installed
-python main.py
+foo@bar /MemZip $ python main.py
 // Starts up the program
 ```
 
