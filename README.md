@@ -1,6 +1,15 @@
-# KPCB_Fellows_Application
-Simple Multiplayer Memory game for my KPCB Engineering Fellowship application
+# MemZip
 
+Multiplayer Memory game for my KPCB Engineering Fellowship application
+
+Check out this project on my Github: https://github.com/theriley106/MemZip
+
+## Playing the game
+
+```bash
+foo@bar /MemZip $ pip install -r requirements.txt
+foo@bar /MemZip $ python main.py
+```
 
 ## Overview
 
@@ -14,12 +23,6 @@ will display in the terminal.  The objective is to respond with the correct orde
 The number of cards to memorize will increment as each round completes.
 In addition, the display time of the cards will decrease as each round progresses.
 
-## Playing the game
-
-```bash
-foo@bar /MemZip $ pip install -r requirements.txt
-foo@bar /MemZip $ python main.py
-```
 
 ## Technical Overview
 
@@ -51,7 +54,3 @@ In essense, the client communicates with the Lambda function over HTTP.  An init
 - Add 1 to the current level
 - Add the time decay to the card delay value
 - Repeat
-
-### Card Text Art
-
-[![N|Solid](static/cards1.png)](#)
