@@ -83,7 +83,7 @@ class game(object):
 		# This is the level the user starts at
 		self.card_order = {}
 		# This is an ongoing dict keeping track of card order
-		self.delay = 1
+		self.delay = 2
 		# This is the delay between cards
 		self.correct = 0
 		# Correct answers by the user
@@ -108,24 +108,38 @@ class game(object):
 			flush_window()
 
 	def start_game(self):
-		cards_in_round = self.level + self.starting_number
-		# This is the amount of cards in the round
-		self.card_order[self.level] = []
-		# This will reset the card order in case it's a replayed game
-		self.print_countdown()
-		# Prints the countdown before the game starts
-		for i in range(cards_in_round):
-			# Iterates over each card in round
-			next_card = random.randint(1,31)
-			# Picks a random card
-			self.card_order[self.level].append(next_card)
-			# Appends it to the current games list of cards
-			display_multiple([next_card])
-			# Displays the SINGLE card... not multiple cards.
-			time.sleep(self.delay)
-			# Sleeps for the delay specified in the beginning
-			flush_window()
-			# Clears the window
+		for j in range(10):
+			# 10 rounds total
+			cards_in_round = self.level + self.starting_number
+			# This is the amount of cards in the round
+			self.card_order[self.level] = []
+			# This will reset the card order in case it's a replayed game
+			self.print_countdown()
+			# Prints the countdown before the game starts
+			for i in range(cards_in_round):
+				# Iterates over each card in round
+				next_card = random.randint(1,31)
+				# Picks a random card
+				self.card_order[self.level].append(next_card)
+				# Appends it to the current games list of cards
+				display_multiple([next_card])
+				# Displays the SINGLE card... not multiple cards.
+				time.sleep(self.delay)
+				# Sleeps for the delay specified in the beginning
+				flush_window()
+				# Clears the window
+			continue_game = self.submit_answers()
+			# Goes to the answer submission screen
+			if continue_game == False:
+				# This means the user lost the game and does not want to replay
+				return False
+				# Returns false to exit the script
+			if self.incorrect > 2:
+				# Checks if the user lost the game or not
+				return True
+		self.game_over()
+		# This means they reached the end of the game
+
 
 	def current_score_string(self):
 		return "{} | Score: {} | Incorrect: {}".format(self.username, self.correct, self.incorrect)
@@ -170,6 +184,12 @@ class game(object):
 				# Returns if the user wants to keep playing or not
 			flush_window()
 			# Clears window
+		self.level += 1
+		# Next level...
+		if self.delay > 1:
+			# Only increased if the delay is currently > 1
+			self.delay -= .1
+			# Decreased by .1
 
 	def print_highscore_chart(self):
 		# This is a function specifically for printing the highscore chart
@@ -181,8 +201,20 @@ class game(object):
 		# Says the user's score has not been printed yet
 		screen = "{} | High Score\n\n".format('Username'.ljust(15))
 		# Prints the header of the high score chart
+		self.highscores = get_high_scores()
+		# This repulls the new high scores
+		temp_list = []
+		# This will hold a list of high scores
 		for key, value in self.highscores.items():
-			# Iterates through all of the high scores
+			# Iterates through all items
+			temp_list.append({"name": key, "score": value})
+			# Turns the dict into a list
+		temp_list = sorted(temp_list, key=lambda k: int(k['score']))[::-1]
+		# Creates the sorted list of high scores
+		for val in temp_list:
+			# Iterates through all items
+			key = val['name']
+			value = val['score']
 			if value <= score and printed == False:
 				# This means the user's score is higher than the one that's about to be printed
 				screen += "{} | {} (Current Player)".format(username, score) + "\n"
@@ -214,13 +246,19 @@ class game(object):
 			return True
 
 	def submit_high_score(self):
-		requests.post(HIGH_SCORE_URL + "?key={}&username={}&number={}".format(SESSION_KEY, self.username, self.correct))
-
+		res = requests.post(HIGH_SCORE_URL + "?key={}&username={}&number={}".format(SESSION_KEY, self.username, self.correct))
 
 if __name__ == '__main__':
-	a = game()
-	a.start_game()
-	while a.submit_answers() == True:
-		a = game(a.username, True)
-		a.start_game()
+	first_round = True
+	while True:
+		if first_round == True:
+			a = game()
+			first_round = False
+		else:
+			a = game(a.username, True)
+		continue_game = a.start_game()
+		if continue_game == False:
+			exit()
+
+
 
