@@ -20,10 +20,9 @@ In addition, the display time of the cards will decrease as each round progresse
 
 ### Frontend
 
-The project was limited to a terminal-based game, so images of playing cards were unfortunately out of the question.
+The project was limited to a terminal-based game, so images of playing cards were unable to be used.
 
-I considered many alternatives for the card displays, but ultimately decided that creating my own text art would be the best way to approach the problem.  Using UTF-8 Characters, I was able to create the look of a regular playing card with a specified height and width.  You can see in card.py, there is a function known as card.create_cards(), which takes a list of dictionaries defining the "Type" and "Suit" of the card and returns a string.
-
+I ultimately decided that creating my own text art would be the best way to create a user friendly card game that could be interacted with from the terminal.  Using UTF-8 Characters, I was able to create the look of a regular playing card with a specified height and width.  You can see in *card.py*, there is a function called card.create_cards(), which takes a list of dictionaries defining the "Type" and "Suit" of the card and returns a string.  This function is implemented in a way that allows the developer to display multiple cards in a single row (ie: During the answer portion of the game).
 
 ### Backend
 
