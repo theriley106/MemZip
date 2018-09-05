@@ -1,8 +1,5 @@
-# MemZip
-
+# KPCB_Fellows_Application
 Multiplayer Memory game for my KPCB Engineering Fellowship application
-
-Check out this project on my Github: https://github.com/theriley106/MemZip
 
 ## Playing the game
 
