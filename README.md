@@ -49,5 +49,5 @@ In essense, the client communicates with the Lambda function over HTTP.  An init
 
 ### Card Text Art
 
-[![N|Solid](static/card1.png)](#)
-[![N|Solid](static/card2.png)](#)
+[![N|Solid](static/cards1.png)](#)
+[![N|Solid](static/cards2.png)](#)
