@@ -10,12 +10,19 @@ MemZip is a multiplayer card memorization game where users can compete against e
 High Scores are recorded externally, so you can play against your friends!
 
 The rules are simple - a group of randomly selected playing cards
-will display in the terminal.  The objective is to respond with the correct order
-of cards to progress through the game.
+will display in the terminal.  The objective is to respond with the correct order of cards to progress through the game.
 
 The number of cards to memorize will increment as each round completes.
 In addition, the display time of the cards will decrease as each round progresses.
 
+## Playing the game
+
+```bash
+pip install -r requirements.txt
+// Just in case requests is not already installed
+python main.py
+// Starts up the program
+```
 
 ## Technical Overview
 
