@@ -169,7 +169,14 @@ class game(object):
 			# Displays all 4 cards in the terminal
 			correct_index = card_choices.index(correct_answer)
 			# This is the index of the correct choice | ie the right answer
-			if int(raw_input("Input Card Number #{}: ".format(i+1))) - 1 != correct_index:
+			while True:
+				# Loops through until the input is correct
+				try:
+					card_number_choice = int(raw_input("Input Card Number #{}: ".format(i+1)))
+					break
+				except ValueError:
+					print("Invalid Input - Please enter a number between 1 and 4.")
+			if int(card_number_choice) - 1 != correct_index:
 				# Checks to see if it's correct or incorrect
 				self.incorrect += 1
 			else:
